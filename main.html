@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>tekila</title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://use.fontawesome.com/0f942f413c.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!--<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>/-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/0f942f413c.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js" defer></script>
+    <script src="app.js" defer></script>
+<body>
+<section class="hero is-dark">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div id="navbarMenuHeroB" class="navbar-menu is-quater is-offset-quauter">
+                <a class="button is-white is-inverted">
+                      <span class="icon">
+                        <i class="fa fa-cog"></i>
+                      </span>
+                    <span>setting</span>
+                </a>
+                <div class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <p>setting</p>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+            </div>
+            <div class="title column is-quater is-herf">
+                <p class="has-text-white is-bold">tekila🍸</p>
+            </div>
+        </div>
+    </div>
+</section>
+<main class="columns">
+    <div class="column is-5 is-offset-3">
+        <section class="section" id="msgForm">
+            <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea class="textarea" v-model="message" laceholder="Textarea"></textarea>
+            </div>
+            </div>
+            <div class="form-container">
+                <button class="button is-dark"@click="submit">送信</button>
+            </div>
+        </section>
+        <section class="section">
+            <div id="example">
+                <my-component v-for="msg in message" :msg="msg" :key="msg.id"></my-component>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
