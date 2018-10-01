@@ -69,7 +69,7 @@ const form = new Vue({
     const hourAgo = new Date();
     const targetHour= hourAgo.setHours(now.getHours() -1);
     const lastpost = JSON.parse(localStorage.getItem('lastPost')) || [];
-    if(lastpost>targetHour){
+    if(lastpost<targetHour){
         form.deleteAllItems();
     }
 })();
