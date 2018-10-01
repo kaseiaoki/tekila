@@ -13,7 +13,7 @@ const timeLine = new Vue({
         for(let item in isItem){
            messageArray.push({id:item, text:isItem[item]});
         }
-        return {message:messageArray}
+        return {message:messageArray};
     },
     components: {
         'my-component': MyComponent
@@ -27,8 +27,8 @@ const form = new Vue({
     data: {
         message: 'text',
         items: [],
-        json:''
-
+        json:'',
+        lastPost:''
     },
     mounted() {
         this.items = JSON.parse(localStorage.getItem('items')) || [];
@@ -37,6 +37,8 @@ const form = new Vue({
     addItem() {
         this.items.push(this.message);
         this.setItems();
+        let date = new Date();
+        this.lastPost = date;
     },
     deleteAllItems() {
         this.items = [];
@@ -44,21 +46,31 @@ const form = new Vue({
     },
     setItems() {
         localStorage.setItem('items', JSON.stringify(this.items));
+        localStorage.setItem('lastpost', JSON.stringify(this.lastPost));
     }, async submit () {
             await console.log(this.message);
-            await timeLine.message.push({id:timeLine.message.length+1, text:this.message});
+            await timeLine.message.push({id:timeLine.message.length+1  ,text:this.message});
             await this.addItem();
             this.message='';
-            document.querySelectorAll('.delete').forEach((elm) => {
-                elm.addEventListener('click', (ev) => {
-                    const target = ev.target.closest('.notification');
-                    if (target) {
-                        target.parentNode.removeChild(target);
-                    }
-                });
-            });
         }
     },
 });
 
+(window.onload = function() {
+    document.querySelectorAll('.delete').forEach((elm) => {
+        elm.addEventListener('click', (ev) => {
+            const target = ev.target.closest('.notification');
+            if (target) {
+                target.parentNode.removeChild(target);
+            }
+        });
+    });
+    const now = new Date();
+    const hourAgo = new Date();
+    const targetHour= hourAgo.setHours(now.getHours() -1);
+    const lastpost = JSON.parse(localStorage.getItem('lastPost')) || [];
+    if(lastpost>targetHour){
+        form.deleteAllItems();
+    }
+})();
 
